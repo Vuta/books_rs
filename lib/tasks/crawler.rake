@@ -8,6 +8,12 @@ namespace :books do
 
     genres_link.each do |genre_link|
       puts "Crawling #{genre_link}..."
+
+      genre_name = genre_link.split("/").last
+      unless Genre.find_by(name: genre_name)
+        genre = Genre.create(name: genre_name)
+      end
+
       genre_page = Nokogiri::HTML(open("https://www.goodreads.com" + genre_link))
 
       if genre_page
