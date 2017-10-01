@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20170929150012) do
 
   create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
-    t.string "author"
+    t.text "author"
     t.text "description"
     t.string "released_date"
     t.string "publisher"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170929150012) do
   end
 
   create_table "genres", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "name"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
