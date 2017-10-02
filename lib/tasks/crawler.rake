@@ -2,10 +2,18 @@ require 'open-uri'
 
 namespace :books do
   task :crawl => :environment do
+    puts "Loggin in.."
+    agent = Mechanize.new
+    main_page = agent.get("https://www.goodreads.com")
+    login_form = main_page.form
+    login_form.field_with(name: "user[email]").value = ENV["GOODREADS_EMAIL"]
+    login_form.field_with(name: "user[password]").value = ENV["GOODREADS_PASS"]
+    login_form.submit
+    puts "Done"
 
     retries = 40
     begin
-      genres = Nokogiri::HTML(open("https://www.goodreads.com/genres"))
+      genres = Nokogiri::HTML(agent.get("https://www.goodreads.com/genres").body)
       genres_link = genres.css(".bigBoxContent a.gr-hyperlink").map { |link| link['href'] }
       genres_link << "/genres/computer-science"
 
@@ -14,8 +22,9 @@ namespace :books do
 
         genre_name = genre_link.split("/").last
         genre = Genre.find_by(name: genre_name) || Genre.create(name: genre_name)
-        3.times do |i|
-          genre_page = Nokogiri::HTML(open("https://www.goodreads.com/shelf/show/" + genre_name + "?page=#{i+1}"))
+        10.times do |i|
+          puts "Crawling page #{i+1} of #{genre_name}"
+          genre_page = Nokogiri::HTML(agent.get("https://www.goodreads.com/shelf/show/" + genre_name + "?page=#{i+1}").body)
 
           if genre_page
             books_link = genre_page.css("a.bookTitle").map { |link| link['href'] }
@@ -34,8 +43,8 @@ namespace :books do
 
             book_cover_links.each do |book_link, cover_link|
               test_book = Book.find_by(cover_image: cover_link)
-              if test_book == nil || test_book.isbn == nil
-                book_page = Nokogiri::HTML(open("https://www.goodreads.com" + book_link))
+              if test_book == nil
+                book_page = Nokogiri::HTML(agent.get("https://www.goodreads.com" + book_link).body)
                 puts "Crawling #{book_link}"
 
                 book = {}
@@ -55,7 +64,7 @@ namespace :books do
 
                 book[:cover_image] = cover_link
                 if book_page.css(".clearFloats .infoBoxRowTitle").text.include? "ISBN"
-                  if book_page.css(".clearFloats .infoBoxRowTitle").first.text == "ISBN"
+                  if book_page.css(".clearFloats .infoBoxRowTitle").first.text.include? "ISBN"
                     book[:isbn] = book_page.css(".clearFloats .infoBoxRowItem").text.split.first
                   else
                     book[:isbn] = book_page.css(".clearFloats .infoBoxRowItem")[1].text.split.first
@@ -63,15 +72,11 @@ namespace :books do
                 end
 
                 book[:genre_id] = genre.id
-                if test_book == nil
-                  puts "Creating book #{book[:title]}"
-                  Book.create(book)
-                  puts "Done"
-                else
-                  puts "Updating book #{book[:title]}"
-                  test_book.update(isbn: book[:isbn])
-                  puts "Done"
-                end
+
+                puts "Creating book #{book[:title]}"
+                Book.create(book)
+                puts "Done"
+
               end
 
             end
@@ -97,13 +102,6 @@ namespace :books do
         raise
       end
     end
-    books.each do |book|
-      puts "Creating book #{book[:title]}"
-      Book.find_by(title: book[:title]) || Book.create(book)
-      puts "Done"
-    end
-    # doc = Nokogiri::HTML(open("https://www.goodreads.com/shelf/show/computer-science"))
-    # links = doc.css(".right a").map { |link| link['href'] }
-    # binding.pry
+
   end
 end
