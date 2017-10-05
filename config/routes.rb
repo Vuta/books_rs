@@ -3,4 +3,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#show', page: 'home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get '/sign_up', to: 'users#new'
+  resources :users, except: :new
 end
