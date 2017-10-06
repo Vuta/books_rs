@@ -7,8 +7,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       sign_in(@user)
-      flash[:success] = "Welcomeeeeeeeeeeeeeee!!"
-      redirect_to @user
+      if @user.sign_in_count == 1
+        redirect_to fav_genres_path
+      else
+        flash[:success] = "Welcomeeeeeeeeeeeeeee!!"
+        redirect_to @user
+      end
     else
       render :new
     end

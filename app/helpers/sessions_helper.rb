@@ -1,6 +1,8 @@
 module SessionsHelper
   def sign_in(user)
     session[:user_id] = user.id
+    user.sign_in_count += 1
+    user.save
   end
 
   def current_user
