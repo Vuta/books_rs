@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   delete '/sign_out', to: 'sessions#destroy'
 
   get '/fav_genres', to: 'favorite_genres#index'
+  post '/fav_genres', to: 'favorite_genres#create'
 end

@@ -1,1 +1,13 @@
-favorite genres
+<%= form_tag(:fav_genres) do %>
+  <div>
+    <% @genres.each do |genre| %>
+      <div>
+        <label>
+          <input type="checkbox" name="favorites[<%= genre.name %>]" value="<%= genre.id %>">
+          <%= genre.name %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+  <%= submit_tag "Save" %>
+<% end %>
