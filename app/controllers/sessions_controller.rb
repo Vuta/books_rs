@@ -6,7 +6,11 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
       sign_in(@user)
-      redirect_to @user
+      if @user.sign_in_count == 1
+        redirect_to fav_genres_path
+      else
+        redirect_to @user
+      end
     else
       flash.now[:danger] = "Invalid email or password!"
       render :new

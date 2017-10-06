@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005143025) do
+ActiveRecord::Schema.define(version: 20171006043558) do
 
   create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20171005143025) do
     t.index ["genre_id"], name: "index_books_on_genre_id"
   end
 
+  create_table "favorite_genres", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_favorite_genres_on_genre_id"
+    t.index ["user_id"], name: "index_favorite_genres_on_user_id"
+  end
+
   create_table "genres", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -39,7 +48,10 @@ ActiveRecord::Schema.define(version: 20171005143025) do
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sign_in_count", default: 0
   end
 
   add_foreign_key "books", "genres"
+  add_foreign_key "favorite_genres", "genres"
+  add_foreign_key "favorite_genres", "users"
 end
