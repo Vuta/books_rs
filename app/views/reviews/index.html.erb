@@ -1,21 +1,36 @@
 <div class="ui vertical segment">
-  <div class="ui vertical menu">
-    <div class="item">
-      <div class="header">Favorite genres:</div>
-      <div class="menu">
-        <% @books.each do |book| %>
-          <a class="custom item"><%= book.first.genre.name %></a>
-        <% end %>
+  <div class="ui grid">
+
+    <div class="ui vertical pointing menu">
+      <div class="item">
+        <div class="header">Favorite genres:</div>
+        <div class="menu">
+          <% @books.each.with_index do |book, index| %>
+            <a class="genre_link item <%= 'default_fav_content' if index == 0 %>" data-genre="<%= book.first.genre.name %>"><%= book.first.genre.name %></a>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="header">More genres:</div>
+        <div class="menu">
+          <% @other_genres.each do |genre| %>
+            <a class="genre_link item" data-genre="<%= genre.name %>"><%= genre.name %></a>
+          <% end %>
+        </div>
       </div>
     </div>
 
-    <div class="item">
-      <div class="header">More genres:</div>
-      <div class="menu">
-        <% @other_genres.each do |genre| %>
-          <a class="custom item"><%= genre.name %></a>
-        <% end %>
-      </div>
+    <div class="twelve wide column">
+      <% Genre.all.each do |genre| %>
+        <div class="<%= genre.name %> fav_content">
+          <% Book.where(genre: genre).first(500).each do |book| %>
+            <h3><%= book.title %></h3>
+          <% end %>
+        </div>
+      <% end %>
+
     </div>
   </div>
+
 </div>
