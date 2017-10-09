@@ -11,6 +11,6 @@ class FavoriteGenresController < ApplicationController
     genre_ids.each do |genre_id|
       FavoriteGenre.create(user_id: current_user.id, genre_id: genre_id)
     end
-    redirect_to current_user
+    redirect_to rate_books_path
   end
 end

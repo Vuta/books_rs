@@ -1,9 +1,14 @@
-<div>
-  <p>This is header</p>
-  <% if signed_in? %>
-    <%= link_to "Sign out", sign_out_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign in", sign_in_path %>
-  <% end %>
+<div class="ui inverted vertical masthead center aligned segment">
+  <div class="ui container">
+    <div class="ui large secondary inverted pointing menu">
+      <a href="/" class="item">Home</a>
+      <div class="right item">
+        <% if signed_in? %>
+          <%= link_to "Sign out", sign_out_path, method: :delete, class: "ui inverted button" %>
+        <% else %>
+          <%= link_to "Sign in", sign_in_path, class: "ui inverted button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-<hr>

@@ -1,0 +1,22 @@
+<div class="ui vertical segment">
+  <div class="ui vertical menu">
+    <div class="item">
+      <div class="header">Favorite genres:</div>
+      <div class="menu">
+        <% @books.each do |book| %>
+          <a class="item" href="/genres/<%= book.first.genre.id%>"><%= book.first.genre.name %></a>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="header">More genres:</div>
+      <div class="menu">
+        <% @other_genres.each do |genre| %>
+          <a class="item"><%= genre.name %></a>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
