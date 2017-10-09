@@ -4,7 +4,7 @@
       <div class="header">Favorite genres:</div>
       <div class="menu">
         <% @books.each do |book| %>
-          <a class="item" href="/genres/<%= book.first.genre.id%>"><%= book.first.genre.name %></a>
+          <a class="custom item"><%= book.first.genre.name %></a>
         <% end %>
       </div>
     </div>
@@ -13,10 +13,9 @@
       <div class="header">More genres:</div>
       <div class="menu">
         <% @other_genres.each do |genre| %>
-          <a class="item"><%= genre.name %></a>
+          <a class="custom item"><%= genre.name %></a>
         <% end %>
       </div>
     </div>
-
   </div>
 </div>
