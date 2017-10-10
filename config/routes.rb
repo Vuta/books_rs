@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   get '/rate_books', to: 'reviews#index'
 
   get '/genres', to: 'genres#index'
-  get '/genres/:id', to: 'genres#show'
+  get '/genres/:id', to: 'genres#show', as: 'genre'
+
+  get '/books/:id', to: 'books#show', as: 'book'
 end

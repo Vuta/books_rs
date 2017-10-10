@@ -3,11 +3,17 @@ class ReviewsController < ApplicationController
 
   def index
     fav_genre_ids = current_user.favorite_genres.pluck(:genre_id)
+    @genres = Genre.all
     @other_genres = Genre.where.not(id: fav_genre_ids)
-    @books = []
+    @fav_books = []
     fav_genre_ids.each do |genre_id|
-      @books << Book.where(genre_id: genre_id)
+      @fav_books << Book.where(genre_id: genre_id)
     end
-    # binding.pry
+
+    @genre_books = []
+    @genres.each do |genre|
+      @books = Book.where(genre: genre)
+      @genre_books << [genre, @books]
+    end
   end
 end

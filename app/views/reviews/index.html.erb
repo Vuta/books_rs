@@ -5,7 +5,7 @@
       <div class="item">
         <div class="header">Favorite genres:</div>
         <div class="menu">
-          <% @books.each.with_index do |book, index| %>
+          <% @fav_books.each.with_index do |book, index| %>
             <a class="genre_link item <%= 'default_fav_content' if index == 0 %>" data-genre="<%= book.first.genre.name %>"><%= book.first.genre.name %></a>
           <% end %>
         </div>
@@ -22,14 +22,14 @@
     </div>
 
     <div class="twelve wide column">
-      <% Genre.all.each do |genre| %>
+      <% @genre_books.each do |genre, books| %>
         <div class="<%= genre.name %> fav_content">
-          <% Book.where(genre: genre).first(500).each do |book| %>
-            <h3><%= book.title %></h3>
+          <% books.each do |book| %>
+            <p class="books_content"><%= link_to book.title, book %></p>
           <% end %>
         </div>
       <% end %>
-
+      <a class="ui button load_more_books">Load more</a>
     </div>
   </div>
 
