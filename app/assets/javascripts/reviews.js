@@ -1,40 +1,47 @@
-// $(document).on('turbolinks:load', function(){
-//   var counter = 1;
+$(document).on('turbolinks:load', function() {
+  var counter = 1;
 
-//   $('a.genre_link').click(function() {
-//     var fav_content = $('.fav_content');
-//     var fav_content_length = fav_content.length;
+  $('a.genre_link').click(function(e) {
+    e.preventDefault();
+    var links = $('a.genre_link');
 
-//     for(var i = 0; i < fav_content_length; i++) {
-//       $(fav_content[i]).removeClass('fav_content_visible');
-//     }
+    for(var i = 0; i < links.length; i++) {
+      $(links[i]).removeClass('active');
+    }
 
-//     var links = $('a.genre_link');
+    var genre = $(this).data('genre');
+    $(this).addClass('active');
 
-//     for(var i = 0; i < links.length; i++) {
-//       $(links[i]).removeClass('active');
-//     }
+    data = {'genre': genre}
+    $.ajax({
+      type: 'GET',
+      url: '/rate_books',
+      data: data,
+      success: function(res) {
+        var html = $(res).find('.' + data.genre + '.fav_content');
+        if($('twelve.genre_books_content').find('.' + data.genre + '.fav_content')[0]) {
+          $('.twelve.wide.column.genre_books_content').append(html);
+        } else {
+          $('.twelve.wide.column.genre_books_content').html(html);
+        }
+      }
+    })
+    counter = 1;
+  })
 
-//     var genre = $(this).data('genre');
-//     $('.' + genre + '.fav_content').addClass('fav_content_visible');
-//     $(this).addClass('active');
+  $('a.load_more_books').click(function(e) {
+    counter += 1;
+    var genre = $('a.genre_link.active').data('genre');
 
-//     // counter = 0;
-//     $('a.load_more_books').click();
-//   })
+    $.ajax({
+      type: 'GET',
+      url: '/rate_books',
+      data: {'page': counter, 'genre': genre},
+      success: function(res) {
+        var html = $(res).find('.' + genre + '.fav_content');
+        $('.twelve.wide.column.genre_books_content').append(html);
+      }
+    })
+  })
+})
 
-//   // $('a.load_more_books').click(function() {
-//   //   counter += 1;
-//   //   $.get('/rate_books?page=' + counter, function(data, status) {
-//   //     console.log(data)
-//   //   })
-//   // })
-
-//   $('a.load_more_books').click(function() {
-//     var genre = $('a.genre_link.active').data('genre');
-//     counter += 1;
-//     $('.' + genre + ' div .books_content').slice(0, 50 * counter).addClass('books_content_visible');
-//   });
-
-//   $('a.genre_link.default_fav_content').click();
-// })

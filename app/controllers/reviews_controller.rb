@@ -7,14 +7,14 @@ class ReviewsController < ApplicationController
       @fav_genres << Genre.find(id).name
     end
 
-    @genres = Genre.all
     @other_genres = Genre.where.not(id: fav_genre_ids).pluck(:name)
 
+    genre = Genre.find_by(name: params[:genre])
 
-    @genre_books = []
-    @genres.each do |genre|
-      @books = Book.where(genre: genre).page(params[:page])
-      @genre_books << [genre, @books]
+    if genre
+      @genre_books = genre.books.page(params[:page]).per(50)
+    else
+      @genre_books = Book.where(genre_id: fav_genre_ids[0]).page(params[:page]).per(50)
     end
   end
 end
