@@ -13,4 +13,11 @@ Rails.application.routes.draw do
 
   get '/fav_genres', to: 'favorite_genres#index'
   post '/fav_genres', to: 'favorite_genres#create'
+
+  get '/rate_books', to: 'reviews#index'
+
+  get '/genres/', to: 'genres#index'
+  get '/genres/:id', to: 'genres#show', as: 'genre'
+
+  get '/books/:id', to: 'books#show', as: 'book'
 end

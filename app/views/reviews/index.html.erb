@@ -1,0 +1,34 @@
+<div class="ui vertical segment">
+  <div class="ui grid">
+    <div class="ui vertical pointing menu">
+      <div class="item">
+        <div class="header">Favorite genres:</div>
+        <div class="menu">
+          <% @fav_genres.each.with_index do |genre, index| %>
+            <a class="genre_link item <%= 'active' if index == 0 %>" data-genre="<%= genre %>"><%= genre %></a>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="header">More genres:</div>
+        <div class="menu">
+          <% @other_genres.each do |genre| %>
+            <a class="genre_link item" data-genre="<%= genre %>"><%= genre %></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="twelve wide column genre_books_content">
+      <div class="<%= @genre_books.first.genre.name %> fav_content">
+        <div class="ui five column grid">
+          <%= render partial: "genre_books", collection: @genre_books %>
+        </div>
+      </div>
+    </div>
+    <div class="row centered">
+      <a class="ui button load_more_books">Load more</a>
+    </div>
+  </div>
+</div>

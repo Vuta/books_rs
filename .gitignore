@@ -18,3 +18,5 @@
 
 .byebug_history
 config/database.yml
+app/assets/images/
+public/system/
