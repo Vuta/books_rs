@@ -1,4 +1,4 @@
-.fav_content {
+/*.fav_content {
   display: none;
 }
 
@@ -6,10 +6,12 @@
   display: block;
 }
 
-.books_content {
+.fav_content .ui.five.column.grid .books_content {
   display: none;
 }
 
-.books_content_visible {
+.fav_content .ui.five.column.grid .column.books_content_visible {
   display: block;
 }
+
+*/

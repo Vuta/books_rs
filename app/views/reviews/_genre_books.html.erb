@@ -1,0 +1,11 @@
+<div class="<%= genre_books[0].name %> fav_content">
+  <div class="ui five column grid">
+    <% genre_books[1].each do |book| %>
+      <div class="column books_content">
+        <div class="ui segment">
+          <%= link_to(image_tag(book.cover.url, class: "ui small image"), book) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

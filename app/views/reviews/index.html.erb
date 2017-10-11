@@ -5,8 +5,8 @@
       <div class="item">
         <div class="header">Favorite genres:</div>
         <div class="menu">
-          <% @fav_books.each.with_index do |book, index| %>
-            <a class="genre_link item <%= 'default_fav_content' if index == 0 %>" data-genre="<%= book.first.genre.name %>"><%= book.first.genre.name %></a>
+          <% @fav_genres.each.with_index do |genre, index| %>
+            <a class="genre_link item <%= 'default_fav_content' if index == 0 %>" data-genre="<%= genre %>" href="#<%= genre %>"><%= genre %></a>
           <% end %>
         </div>
       </div>
@@ -15,20 +15,14 @@
         <div class="header">More genres:</div>
         <div class="menu">
           <% @other_genres.each do |genre| %>
-            <a class="genre_link item" data-genre="<%= genre.name %>"><%= genre.name %></a>
+            <a class="genre_link item" data-genre="<%= genre %>"><%= genre %></a>
           <% end %>
         </div>
       </div>
     </div>
 
     <div class="twelve wide column">
-      <% @genre_books.each do |genre, books| %>
-        <div class="<%= genre.name %> fav_content">
-          <% books.each do |book| %>
-            <p class="books_content"><%= link_to book.title, book %></p>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render partial: "genre_books", collection: @genre_books %>
       <a class="ui button load_more_books">Load more</a>
     </div>
   </div>
