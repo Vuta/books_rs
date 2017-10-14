@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post '/fav_genres', to: 'favorite_genres#create'
 
   get '/rate_books', to: 'reviews#index'
+  post '/rate_books', to: 'reviews#create'
 
   get '/genres/', to: 'genres#index'
   get '/genres/:id', to: 'genres#show', as: 'genre'
