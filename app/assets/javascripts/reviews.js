@@ -1,4 +1,6 @@
 $(document).on('turbolinks:load', function() {
+  $('.ui.star.rating').rating();
+
   var counter = 1;
 
   $('a.genre_link').click(function(e) {
@@ -24,6 +26,8 @@ $(document).on('turbolinks:load', function() {
         } else {
           $('.twelve.wide.column.genre_books_content').html(html);
         }
+
+        $('.ui.star.rating').rating();
       }
     })
     counter = 1;
@@ -40,8 +44,9 @@ $(document).on('turbolinks:load', function() {
       success: function(res) {
         var html = $(res).find('.' + genre + '.fav_content');
         $('.twelve.wide.column.genre_books_content').append(html);
+
+        $('.ui.star.rating').rating();
       }
-    })
+    });
   })
 })
-
