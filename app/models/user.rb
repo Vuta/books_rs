@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :favorite_genres
+  has_many :reviews
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }

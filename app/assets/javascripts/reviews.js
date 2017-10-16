@@ -1,8 +1,11 @@
 $(document).on('turbolinks:load', function() {
+  $('.ui.star.rating').rating();
+
   var counter = 1;
 
   $('a.genre_link').click(function(e) {
     e.preventDefault();
+
     var links = $('a.genre_link');
 
     for(var i = 0; i < links.length; i++) {
@@ -24,6 +27,8 @@ $(document).on('turbolinks:load', function() {
         } else {
           $('.twelve.wide.column.genre_books_content').html(html);
         }
+
+        $('.ui.star.rating').rating();
       }
     })
     counter = 1;
@@ -40,8 +45,24 @@ $(document).on('turbolinks:load', function() {
       success: function(res) {
         var html = $(res).find('.' + genre + '.fav_content');
         $('.twelve.wide.column.genre_books_content').append(html);
+
+        $('.ui.star.rating').rating();
       }
-    })
+    });
   })
+
 })
 
+$(document).on('click', '.ui.star.rating', function() {
+  var book_id = $(this).data('book-id');
+  var rate = $(this).find('i.icon.active').length;
+
+  $.ajax({
+    type: 'POST',
+    url: '/rate_books',
+    data: {'book_id': book_id, 'rate': rate},
+    success: function(res) {
+      console.log(1)
+    }
+  })
+})
