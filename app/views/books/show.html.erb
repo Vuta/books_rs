@@ -1,2 +1,53 @@
-<h3><%= @book.title %></h3>
-<p><%= @book.description %></p>
+<div class="ui container">
+  <div class="ui vertical segment">
+    <div class="ui grid">
+      <div class="row">
+        <div class="center aligned three wide column">
+          <%= image_tag @book.cover.url, class: "ui fluid image" %>
+          <div class="ui header">
+            <% if current_user && current_user.reviews.pluck(:book_id).include?(@book.id) %>
+              <div class="sub header">My rating:</div>
+              <div class="ui star rating" data-max-rating="5" data-rating="<%= Review.find_by(user_id: current_user, book_id: @book).rate %>" data-book-id="<%= @book.id %>"></div>
+            <% else %>
+              <div class="sub header">Rate this book:</div>
+              <div class="ui star rating" data-max-rating="5" data-book-id="<%= @book.id %>"></div>
+            <% end %>
+          </div>
+        </div>
+        <div class="ui twelve wide column">
+          <div class="row">
+            <h2 class="ui header">
+              <%= @book.title %>
+              <div class="sub header">
+                <small>by</small> <%= @book.author %>
+              </div>
+            </h2>
+
+            <div>
+              <div class="ui star rating disable" data-max-rating="5" data-rating="<%= @book.avg_rating %>"></div>
+              <%= @book.avg_rating %> - Rating details: <%= @book.reviews.pluck(:rate).length %> Ratings - <%= @book.reviews.pluck(:text).compact.length %> Reviews
+            </div>
+            <div>
+              <%= @book.description %>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <h4 class="ui header">Other details:</h4>
+            <% if @book.isbn %>
+              <div>ISBN <%= @book.isbn %></div>
+            <% end %>
+            <div>Published <%= @book.released_date %> by <%= @book.publisher %></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <div class="ui dividing header">Community Reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
