@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function() {
   $('.ui.star.rating').rating();
+  $('.ui.star.rating.disable').rating('disable');
 
   var counter = 1;
 

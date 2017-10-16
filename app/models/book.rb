@@ -4,4 +4,14 @@ class Book < ApplicationRecord
 
   has_attached_file :cover, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/missing.jpg"
   validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/
+
+  def avg_rating
+    # binding.pry
+    if self.reviews.length != 0
+      rates = self.reviews.pluck(:rate)
+      rates.inject(:+) / rates.count
+    else
+      0
+    end
+  end
 end
