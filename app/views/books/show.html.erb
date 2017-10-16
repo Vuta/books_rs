@@ -36,7 +36,9 @@
 
           <div class="row">
             <h4 class="ui header">Other details:</h4>
-            <div>ISBN <%= @book.isbn %></div>
+            <% if @book.isbn %>
+              <div>ISBN <%= @book.isbn %></div>
+            <% end %>
             <div>Published <%= @book.released_date %> by <%= @book.publisher %></div>
           </div>
         </div>
