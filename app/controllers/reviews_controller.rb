@@ -7,6 +7,11 @@ class ReviewsController < ApplicationController
       @fav_genres << Genre.find(id).name
     end
 
+    if fav_genre_ids.length == 0
+      flash[:notice] = "Please select at least one genre to continue"
+      redirect_to fav_genres_path
+    end
+
     @other_genres = Genre.where.not(id: fav_genre_ids).pluck(:name)
 
     genre = Genre.find_by(name: params[:genre])
