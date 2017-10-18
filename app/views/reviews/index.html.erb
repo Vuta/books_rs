@@ -5,7 +5,7 @@
         <div class="header">Favorite genres:</div>
         <div class="menu">
           <% @fav_genres.each.with_index do |genre, index| %>
-            <a class="genre_link item <%= 'active' if index == 0 %>" data-genre="<%= genre %>"><%= genre %></a>
+            <a class="genre_link item <%= 'active' if index == 0 %>" data-genre="<%= genre %>"><%= genre.titleize %></a>
           <% end %>
         </div>
       </div>
@@ -14,7 +14,7 @@
         <div class="header">More genres:</div>
         <div class="menu">
           <% @other_genres.each do |genre| %>
-            <a class="genre_link item" data-genre="<%= genre %>"><%= genre %></a>
+            <a class="genre_link item" data-genre="<%= genre %>"><%= genre.titleize %></a>
           <% end %>
         </div>
       </div>

@@ -1,13 +1,33 @@
-<%= form_tag(:fav_genres) do %>
-  <div>
-    <% @genres.each do |genre| %>
-      <div>
-        <label>
-          <input type="checkbox" name="favorites[<%= genre.name %>]" value="<%= genre.id %>">
-          <%= genre.name %>
-        </label>
+<div class="ui container">
+  <div class="ui vertical segment">
+    <div class="ui grid">
+      <div class="row">
+        <div class="center aligned column">
+          <h1 class="ui header">
+            Follow Your Favorite Genres
+            <div class="sub header">
+              We use your favorite genres to make better recommendations
+            </div>
+          </h1>
+        </div>
       </div>
-    <% end %>
+      <div class="row">
+        <%= form_tag(:fav_genres) do %>
+          <div class="ui labels grid">
+            <% @genres.each do |genre| %>
+              <label class="ui three wide column fav_genres_label label">
+                <input type="checkbox" name="favorites[<%= genre.name %>]" value="<%= genre.id %>">
+                <%= genre.name.titleize %>
+              </label>
+            <% end %>
+            </div>
+            <div class="ui grid">
+              <div class="centered five wide column fav_genres_submit_button">
+                <%= submit_tag "Continue", class: "ui positive fluid large button" %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <%= submit_tag "Save" %>
-<% end %>
+</div>
