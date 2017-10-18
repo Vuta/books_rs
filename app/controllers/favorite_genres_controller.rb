@@ -7,6 +7,7 @@ class FavoriteGenresController < ApplicationController
 
   def create
     genre_ids = []
+    current_user.favorite_genres.destroy_all
     if params[:favorites].nil?
       flash[:notice] = "You must select at least one genre to continue"
       redirect_to fav_genres_path
