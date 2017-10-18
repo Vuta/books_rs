@@ -1,4 +1,16 @@
+<!-- <div class="ui vertical segment">
+
+</div> -->
 <div class="ui vertical segment">
+  <div class="ui grid">
+    <div class="row">
+      <div class="center aligned column">
+        <h1 class="header">Rate Books that You're Read</h1>
+        <p>We learn about your personal tastes from your ratings.</p>
+        <p><b>Rate at least 20 books</b> to get personalized recommendations!</p>
+      </div>
+    </div>
+  </div>
   <div class="ui grid">
     <div class="ui vertical pointing menu">
       <div class="item">
@@ -22,6 +34,7 @@
 
     <div class="twelve wide column genre_books_content">
       <div class="<%= @genre_books.first.genre.name %> fav_content">
+        <h4 class="header"><%= @genre_books.first.genre.name.titleize %></h4>
         <div class="ui five column grid">
           <%= render partial: "genre_books", collection: @genre_books %>
         </div>
