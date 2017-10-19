@@ -1,12 +1,26 @@
-<div class="ui inverted vertical masthead center aligned segment">
+<div class="row">
   <div class="ui container">
-    <div class="ui large secondary inverted pointing menu">
+    <div class="ui large secondary menu">
       <a href="/" class="item">Home</a>
       <div class="right item">
         <% if signed_in? %>
-          <%= link_to "Sign out", sign_out_path, method: :delete, class: "ui inverted button" %>
+          <%= link_to "Sign out", sign_out_path, method: :delete, class: "ui button" %>
         <% else %>
-          <%= link_to "Sign in", sign_in_path, class: "ui inverted button" %>
+          <%= form_for :session, html: { class: "ui mini form" }, url: sign_in_path do |f| %>
+            <div class="fields">
+              <div class="field">
+                <%= f.email_field :email, placeholder: "Email" %>
+              </div>
+
+              <div class="field">
+                <%= f.password_field :password, placeholder: "Password" %>
+              </div>
+
+              <div class="field">
+                <%= f.submit "Sign in", class: "ui mini black button" %>
+              </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>

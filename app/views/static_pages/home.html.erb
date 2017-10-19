@@ -1,1 +1,48 @@
-<h1>Homepage will coming soon</h1>
+<div class="ui grid home_main">
+  <%= render "layouts/header" %>
+  <div class="row">
+    <div class="center aligned ten wide column">
+      <h1 class="header">Meet your next favorite book.</h1>
+    </div>
+    <div class="four wide column new_account_box">
+      <p>New here? Create a free account!</p>
+      <%= form_for @user, html: { class: "ui form sign_up_form" } do |f| %>
+        <div>
+          <% if @user.errors.any? %>
+            <% @user.errors.full_messages.each do |msg| %>
+              <p><%= msg %></p>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="field">
+          <%= f.text_field :name, placeholder: "Name" %>
+        </div>
+
+        <div class="field">
+          <%= f.email_field :email, placeholder: "Email Address" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password, placeholder: "Password" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>
+        </div>
+        <%= f.submit "Sign up", class: "ui large fluid olive button" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="ui grid">
+  <div class="row">
+    <div class="center aligned column">
+      <h1>Deciding what to read next?</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="center aligned column">
+      <p>You’re in the right place. Tell us what titles or genres you’ve enjoyed in the past, and we’ll give you surprisingly insightful recommendations.</p>
+    </div>
+  </div>
+</div>

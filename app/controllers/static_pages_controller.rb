@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
   def show
     if valid_page?
+      @user = User.new
       render "static_pages/#{params[:page]}"
     else
       render file: "public/404.html", status: :not_found

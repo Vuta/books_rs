@@ -9,12 +9,13 @@
   </head>
 
   <body>
-    <%= render "layouts/header" %>
-    <div>
-      <% flash.each do |type, message| %>
-        <div class="flash flash-<%= type %>"><%= message %></div>
-      <% end %>
+    <div class="ui vertical segment">
+      <div>
+        <% flash.each do |type, message| %>
+          <div class="flash flash-<%= type %>"><%= message %></div>
+        <% end %>
+      </div>
+      <%= yield %>
     </div>
-    <%= yield %>
   </body>
 </html>
