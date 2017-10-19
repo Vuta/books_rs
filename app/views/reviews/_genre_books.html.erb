@@ -1,7 +1,26 @@
 <div class="column books_content">
   <div class="ui segment">
-    <%= link_to(image_tag(genre_books.cover.url, class: "ui small image custom_image_size"), genre_books) %>
-    <p class="centered">Rate it:</p>
-    <div class="ui star rating" data-max-rating="5" data-book-id="<%= genre_books.id %>"></div>
+    <%= link_to(image_tag(genre_books.cover.url, data: {"book-id": genre_books.id}, class: "ui small image custom_image_size"), genre_books) %>
+    <div id="book-<%= genre_books.id %>-details-hover" class="book-details-hover">
+      <h4 class="ui header">
+        <%= genre_books.title %>
+        <div class="sub header">
+          <small>by</small> <%= genre_books.author %>
+        </div>
+      </h4>
+
+      <div>
+        <div class="ui star rating disable" data-max-rating="5" data-rating="<%= genre_books.avg_rating %>"></div>
+        <%= genre_books.avg_rating %> avg rating - <%= genre_books.reviews.pluck(:rate).length %> Ratings - Published <%= genre_books.released_date.split(" ").last %>
+      </div>
+      <p><%= truncate(genre_books.description, length: 300, seperator: " ") %></p>
+    </div>
+
+    <div class="ui grid">
+      <div class="sixteen wide center aligned column">
+        <p>Rate it:</p>
+        <div class="ui star rating" data-max-rating="5" data-book-id="<%= genre_books.id %>"></div>
+      </div>
+    </div>
   </div>
 </div>

@@ -67,3 +67,22 @@ $(document).on('click', '.ui.star.rating', function() {
     }
   })
 })
+
+$(document).on('mouseenter', '.ui.custom_image_size', function() {
+  var book_id = $(this).data('book-id');
+  var left_offset = $(this).offset().left;
+  var book_details_hover = $('#book-' + book_id + '-details-hover')
+
+  if(left_offset + 500 > $(window).width()) {
+    $(book_details_hover).css('right', '110%')
+  } else {
+    $(book_details_hover).css('left', '110%')
+  }
+
+  $(book_details_hover).css('visibility', 'visible')
+})
+
+$(document).on('mouseleave', '.ui.custom_image_size', function() {
+  var book_id = $(this).data('book-id');
+  $('#book-' + book_id + '-details-hover').css('visibility', 'hidden')
+})

@@ -1,6 +1,3 @@
-<!-- <div class="ui vertical segment">
-
-</div> -->
 <div class="ui vertical segment">
   <div class="ui grid">
     <div class="row">
@@ -34,7 +31,6 @@
 
     <div class="twelve wide column genre_books_content">
       <div class="<%= @genre_books.first.genre.name %> fav_content">
-        <h4 class="header"><%= @genre_books.first.genre.name.titleize %></h4>
         <div class="ui five column grid">
           <%= render partial: "genre_books", collection: @genre_books %>
         </div>
