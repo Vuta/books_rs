@@ -24,7 +24,7 @@
             </h2>
 
             <div>
-              <div class="ui star rating disable" data-max-rating="5" data-rating="<%= @book.avg_rating %>"></div>
+              <div class="ui star rating disable" data-max-rating="5" data-rating="<%= @book.avg_rating.to_i %>"></div>
               <%= @book.avg_rating %> - Rating details: <%= @book.reviews.pluck(:rate).length %> Ratings - <%= @book.reviews.pluck(:text).compact.length %> Reviews
             </div>
             <div>

@@ -10,7 +10,7 @@
       </h4>
 
       <div>
-        <div class="ui star rating disable" data-max-rating="5" data-rating="<%= genre_books.avg_rating %>"></div>
+        <div class="ui star rating disable" data-max-rating="5" data-rating="<%= genre_books.avg_rating.to_i %>"></div>
         <%= genre_books.avg_rating %> avg rating - <%= genre_books.reviews.pluck(:rate).length %> Ratings - Published <%= genre_books.released_date.split(" ").last %>
       </div>
       <p><%= truncate(genre_books.description, length: 300, seperator: " ") %></p>
