@@ -35,6 +35,7 @@ gem 'nokogiri'
 gem 'mechanize'
 gem 'pry-rails'
 gem 'faker'
+gem 'activerecord-import'
 
 gem 'semantic-ui-sass'
 gem 'kaminari'

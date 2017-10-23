@@ -9,7 +9,7 @@ class Book < ApplicationRecord
     # binding.pry
     if self.reviews.length != 0
       rates = self.reviews.pluck(:rate)
-      rates.inject(:+).to_f / rates.count
+      (rates.inject(:+).to_f / rates.count).ceil(2)
     else
       0
     end
