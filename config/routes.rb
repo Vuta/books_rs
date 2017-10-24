@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   get '/genres/:id', to: 'genres#show', as: 'genre'
 
   get '/books/:id', to: 'books#show', as: 'book'
+
+  get '/recommendations', to: 'recommendations#index'
 end
