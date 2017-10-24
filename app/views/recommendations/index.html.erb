@@ -2,7 +2,6 @@
   <% @recommendations.each do |book| %>
     <p>
       <%= link_to book.title, book %>
-    </p>
   <% end %>
 <% else %>
  <p>You have no recommendations yet. Try <%= link_to "rate more books", rate_books_path %></p>
