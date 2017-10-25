@@ -13,7 +13,7 @@ class User < ApplicationRecord
   end
 
   def self.select_profile
-    [first(500), last(count - 500).sample(100)].flatten
+    [first(500), last(count - 500).sample(300)].flatten
   end
 
   def match_profile(sample_profiles)
@@ -75,7 +75,7 @@ class User < ApplicationRecord
         recommended_books << review.book if common_fav_genres.include? review.book.genre_id
       end
 
-      recommended_books.first(10)
+      recommended_books.first(15)
     end
   end
 end

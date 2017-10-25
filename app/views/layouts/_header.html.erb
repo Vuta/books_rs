@@ -1,28 +1,55 @@
 <div class="row">
+  <div class="column">
   <div class="ui container">
     <div class="ui large secondary menu">
       <a href="/" class="item">Home</a>
-      <div class="right item">
         <% if signed_in? %>
-          <%= link_to "Sign out", sign_out_path, method: :delete, class: "ui button" %>
-        <% else %>
-          <%= form_for :session, html: { class: "ui mini form" }, url: sign_in_path do |f| %>
-            <div class="fields">
-              <div class="field">
-                <%= f.email_field :email, placeholder: "Email" %>
-              </div>
-
-              <div class="field">
-                <%= f.password_field :password, placeholder: "Password" %>
-              </div>
-
-              <div class="field">
-                <%= f.submit "Sign in", class: "ui mini black button" %>
+          <div class="ui dropdown item">
+            Browse
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item"><%= link_to "Recommendations", recommendations_path %></div>
+              <div class="item"><%= link_to "Top Popular", "#"  %></div>
+            </div>
+          </div>
+          <div class="menu">
+            <div class="item">
+              <div class="ui icon input">
+                <input type="text" placeholder="Search books...">
+                <i class="search link icon"></i>
               </div>
             </div>
-          <% end %>
+          </div>
+          <div class="ui right dropdown item header_dropdown">
+            Actions
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item"><%= link_to "View Profile", current_user %></div>
+              <div class="item"><%= link_to "Account Settings", "#" %></div>
+              <div class="divider"></div>
+              <div class="item"><%= link_to "Sign Out", sign_out_path, method: :delete %></div>
+            </div>
+          </div>
+        <% else %>
+          <div class="right item">
+            <%= form_for :session, html: { class: "ui mini form" }, url: sign_in_path do |f| %>
+              <div class="fields">
+                <div class="field">
+                  <%= f.email_field :email, placeholder: "Email" %>
+                </div>
+
+                <div class="field">
+                  <%= f.password_field :password, placeholder: "Password" %>
+                </div>
+
+                <div class="field">
+                  <%= f.submit "Sign in", class: "ui mini black button" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
         <% end %>
-      </div>
     </div>
+  </div>
   </div>
 </div>

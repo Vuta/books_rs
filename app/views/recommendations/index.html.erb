@@ -1,8 +1,70 @@
-<% if @recommendations %>
-  <% @recommendations.each do |book| %>
-    <p>
-      <%= link_to book.title, book %>
-  <% end %>
-<% else %>
- <p>You have no recommendations yet. Try <%= link_to "rate more books", rate_books_path %></p>
-<% end %>
+<div class="ui grid">
+  <div class="ui container">
+    <% if @recommendations %>
+      <div class="column recommendations_headline">
+        <h2 class="ui header">Recommendations</h2>
+        <p>
+          Here are some books we think you'll love.
+          <span class="recommendation_tips">How to improve your recommendations..</span>
+          <div class="recommendations_popup">
+            <div class="ui segment">
+              <h5 class="ui header">Help Us Improve Your Recommendations</h5>
+              <div class="sixteen wide column">
+                <div class="ui bulleted list">
+                  <div class="item">Rate more books. The more you rate, the better recommendations will be.</div>
+                  <div class="item">Get specific about your favorite genres. The more accurate you get, the better.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p>
+      </div>
+
+      <% @genre_books.each do |genre_book| %>
+
+        <div class="row">
+          <div class="ui grid">
+            <div class="sixteen wide column">
+              <h5 class="ui dividing header">Your interest in <%= genre_book.first %></h5>
+            </div>
+            <div class="sixteen wide column">
+              <div class="ui grid">
+              <% genre_book.last.each do |book| %>
+                <div class="three wide column books_content">
+                  <div class="ui segment">
+                    <%= link_to(image_tag(book.cover.url, data: {"book-id": book.id}, class: "ui small image custom_image_size"), book) %>
+                    <div id="book-<%= book.id %>-details-hover" class="book-details-hover">
+                      <h4 class="ui header">
+                        <%= book.title %>
+                        <div class="sub header">
+                          <small>by</small> <%= book.author %>
+                        </div>
+                      </h4>
+
+                      <div>
+                        <div class="ui star rating disable" data-max-rating="5" data-rating="<%= book.avg_rating.to_i %>"></div>
+                        <%= book.avg_rating %> avg rating - <%= book.reviews.pluck(:rate).length %> Ratings - Published <%= book.released_date.split(" ").last %>
+                      </div>
+                      <p><%= truncate(book.description, length: 300, seperator: " ") %></p>
+                    </div>
+
+                    <div class="ui grid">
+                      <div class="sixteen wide center aligned column">
+                        <p>Rate it:</p>
+                        <div class="ui star rating" data-max-rating="5" data-book-id="<%= book.id %>"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    <% else %>
+      <p>You have no recommendations yet. Try <%= link_to "rate more books", rate_books_path %></p>
+    <% end %>
+  </div>
+</div>

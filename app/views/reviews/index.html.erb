@@ -1,13 +1,20 @@
-<div class="ui vertical segment">
-  <div class="ui grid">
+<div class="ui vertical segment" id="rate_books_container">
+  <!-- <div class="ui segment"> -->
+  <div class="ui grid" style="background-color: #E4F4DA;">
     <div class="row">
       <div class="center aligned column">
         <h1 class="header">Rate Books that You're Read</h1>
-        <p>We learn about your personal tastes from your ratings.</p>
-        <p><b>Rate at least 20 books</b> to get personalized recommendations!</p>
+        <% if current_user.reviews.count < 20 %>
+          <p>We learn about your personal tastes from your ratings.</p>
+          <p><b>Rate at least 20 books</b> to get personalized recommendations!</p>
+          <%= link_to "I'm finish rating!", recommendations_path %>
+        <% else %>
+          <p>We've got recommendations for you. Continue rating books to even get better results, or <%= link_to "see your recommendations", recommendations_path %></p>
+        <% end %>
       </div>
     </div>
   </div>
+  <!-- </div> -->
   <div class="ui grid">
     <div class="ui vertical pointing menu">
       <div class="item">
