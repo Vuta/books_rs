@@ -13,7 +13,7 @@ class User < ApplicationRecord
   end
 
   def self.select_profile
-    [first(500), last(count - 500).sample(300)].flatten
+    [first(500), last(count - 500).sample(450)].flatten
   end
 
   def match_profile(sample_profiles)
