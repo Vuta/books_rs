@@ -23,4 +23,13 @@ Rails.application.routes.draw do
   get '/books/:id', to: 'books#show', as: 'book'
 
   get '/recommendations', to: 'recommendations#index'
+
+  namespace :admin do
+    root 'sessions#new'
+
+    get 'sign_in', to: 'sessions#new'
+    post 'sign_in', to: 'sessions#create'
+
+    get '/dashboard', to: 'dashboards#index'
+  end
 end

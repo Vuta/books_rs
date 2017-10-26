@@ -1,10 +1,14 @@
 class SessionsController < ApplicationController
   def new
+    if current_user
+      flash[:notice] = "You are already signed in"
+      redirect_to root_url
+    end
   end
 
   def create
     @user = User.find_by(email: params[:session][:email])
-    if @user && @user.authenticate(params[:session][:password])
+    if @user && @user.authenticate(params[:session][:password]) && !@user.admin?
       sign_in(@user)
       if @user.sign_in_count == 1
         redirect_to fav_genres_path
@@ -18,8 +22,12 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    if current_user.admin?
+      redirect_to admin_root_url
+    else
+      redirect_to root_url
+    end
     sign_out
     flash[:success] = "You have been signed out!"
-    redirect_to root_url
   end
 end
