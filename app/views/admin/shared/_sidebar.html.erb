@@ -1,9 +1,0 @@
-<div class="ui left fixed vertical inverted menu">
-  <div class="item">
-    <h4 class="ui grey header">
-      <%= current_user.name %>
-    </h4>
-    <%= link_to "Sign out", sign_out_path, method: :delete %>
-  </div>
-  <%= link_to "Dashboard", admin_dashboard_path, class: "item" %>
-</div>
