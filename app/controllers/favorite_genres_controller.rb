@@ -1,5 +1,5 @@
 class FavoriteGenresController < ApplicationController
-  before_action :signed_in_user
+  before_action :authenticate_user!
 
   def index
     @current_genres = current_user.favorite_genres.pluck(:genre_id)

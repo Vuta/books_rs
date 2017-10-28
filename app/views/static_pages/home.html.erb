@@ -5,16 +5,12 @@
     </div>
     <div class="four wide column new_account_box">
       <p>New here? Create a free account!</p>
-      <%= form_for @user, html: { class: "ui form sign_up_form" } do |f| %>
-        <div>
-          <% if @user.errors.any? %>
-            <% @user.errors.full_messages.each do |msg| %>
-              <p><%= msg %></p>
-            <% end %>
-          <% end %>
-        </div>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "ui form sign_up_form" }) do |f| %>
+        <%= devise_error_messages! %>
+
         <div class="field">
-          <%= f.text_field :name, placeholder: "Name" %>
+          <%= f.text_field :name, placeholder: "Name", autofocus: true %>
         </div>
 
         <div class="field">
@@ -22,13 +18,16 @@
         </div>
 
         <div class="field">
-          <%= f.password_field :password, placeholder: "Password" %>
+          <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
         </div>
 
         <div class="field">
-          <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>
+          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password Confirmation" %>
         </div>
-        <%= f.submit "Sign up", class: "ui large fluid olive button" %>
+
+        <div class="actions">
+          <%= f.submit "Sign up", class: "ui large fluid olive button" %>
+        </div>
       <% end %>
     </div>
   </div>

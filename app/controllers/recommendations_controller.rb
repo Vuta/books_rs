@@ -1,5 +1,5 @@
 class RecommendationsController < ApplicationController
-  before_action :signed_in_user
+  before_action :authenticate_user!
 
   def index
     if current_user.reviews.count >= 20
