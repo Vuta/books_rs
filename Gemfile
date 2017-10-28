@@ -36,6 +36,8 @@ gem 'mechanize'
 gem 'pry-rails'
 gem 'faker'
 gem 'activerecord-import'
+gem 'activeadmin'
+gem 'devise'
 
 gem 'semantic-ui-sass'
 gem 'kaminari'
