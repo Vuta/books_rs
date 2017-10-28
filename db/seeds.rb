@@ -53,3 +53,4 @@ end
 
 columns = [:book_id, :user_id, :rate]
 Review.import columns, reviews_arr, validate: false
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

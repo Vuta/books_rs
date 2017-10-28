@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id], admin: false)
+    @user = User.find_by(id: params[:id])
 
     unless @user
       flash[:danger] = "The page you was looking for doesn't exist."
