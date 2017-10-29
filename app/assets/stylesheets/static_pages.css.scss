@@ -1,0 +1,22 @@
+.ui.vertical.segment .home_main {
+  background-image: url("/assets/home_background5.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  h1.header {
+    font-size: 50px;
+    color: #A05252;
+  }
+
+  .new_account_box {
+    margin-left: 70px;
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  form.sign_up_form {
+    padding-bottom: 200px;
+  }
+}

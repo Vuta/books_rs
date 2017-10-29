@@ -73,7 +73,7 @@ $(document).on('mouseenter', '.ui.custom_image_size', function() {
   var left_offset = $(this).offset().left;
   var book_details_hover = $('#book-' + book_id + '-details-hover')
 
-  if(left_offset + 500 > $(window).width()) {
+  if(left_offset + 600 > $(window).width()) {
     $(book_details_hover).css('right', '110%')
   } else {
     $(book_details_hover).css('left', '110%')
@@ -85,4 +85,12 @@ $(document).on('mouseenter', '.ui.custom_image_size', function() {
 $(document).on('mouseleave', '.ui.custom_image_size', function() {
   var book_id = $(this).data('book-id');
   $('#book-' + book_id + '-details-hover').css('visibility', 'hidden')
+})
+
+$(document).on('mouseenter', 'span.recommendation_tips', function() {
+  $('.recommendations_popup').css('visibility', 'visible')
+})
+
+$(document).on('mouseleave', 'span.recommendation_tips', function() {
+  $('.recommendations_popup').css('visibility', 'hidden')
 })

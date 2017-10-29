@@ -1,14 +1,66 @@
-<div class="ui inverted vertical masthead center aligned segment">
+<div class="row">
+  <div class="column">
   <div class="ui container">
-    <div class="ui large secondary inverted pointing menu">
+    <div class="ui large secondary menu">
       <a href="/" class="item">Home</a>
-      <div class="right item">
         <% if signed_in? %>
-          <%= link_to "Sign out", sign_out_path, method: :delete, class: "ui inverted button" %>
+          <div class="ui dropdown item">
+            Browse
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item"><%= link_to "Recommendations", recommendations_path %></div>
+              <div class="item"><%= link_to "Top Popular", "#"  %></div>
+            </div>
+          </div>
+          <div class="menu">
+            <div class="item">
+              <div class="ui icon input">
+                <input type="text" placeholder="Search books...">
+                <i class="search link icon"></i>
+              </div>
+            </div>
+          </div>
+          <div class="ui right dropdown item header_dropdown">
+            Actions
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item"><%= link_to "View Profile", current_user %></div>
+              <div class="item"><%= link_to "Account Settings", "#" %></div>
+              <div class="divider"></div>
+              <div class="item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></div>
+            </div>
+          </div>
         <% else %>
-          <%= link_to "Sign in", sign_in_path, class: "ui inverted button" %>
+          <div class="right item">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "ui mini form"}) do |f| %>
+            <div class="fields">
+              <div class="field">
+                <%= f.email_field :email, autofocus: true, placeholder: "Email" %>
+              </div>
+
+              <div class="field">
+                <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
+              </div>
+
+              <div class="field">
+                <%= f.submit "Sign In", class: "ui mini black button" %>
+              </div>
+              </div>
+            <% end %>
+
+              <div class="fields">
+                <div class="field">
+                </div>
+
+                <div class="field">
+                </div>
+
+                <div class="field">
+                </div>
+              </div>
+          </div>
         <% end %>
-      </div>
     </div>
+  </div>
   </div>
 </div>

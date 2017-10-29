@@ -16,7 +16,7 @@
           <div class="ui labels grid">
             <% @genres.each do |genre| %>
               <label class="ui three wide column fav_genres_label label">
-                <input type="checkbox" name="favorites[<%= genre.name %>]" value="<%= genre.id %>">
+                <input type="checkbox" name="favorites[<%= genre.name %>]" value="<%= genre.id %>" <%= "checked" if @current_genres.include? genre.id %>>
                 <%= genre.name.titleize %>
               </label>
             <% end %>

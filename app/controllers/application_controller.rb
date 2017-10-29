@@ -1,13 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  include SessionsHelper
 
-  private
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def signed_in_user
-    unless current_user
-      flash[:danger] = "Please sign in to continue!"
-      redirect_to sign_in_path
+  protected
+
+  def after_sign_in_path_for(user)
+    if user.favorite_genres = []
+      fav_genres_path
+    else
+      user_path(user)
     end
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 end

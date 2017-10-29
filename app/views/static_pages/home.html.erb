@@ -1,1 +1,46 @@
-<h1>Homepage will coming soon</h1>
+<div class="ui grid home_main">
+  <div class="row">
+    <div class="center aligned ten wide column">
+      <h1 class="header">Meet your next favorite book.</h1>
+    </div>
+    <div class="four wide column new_account_box">
+      <p>New here? Create a free account!</p>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "ui form sign_up_form" }) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="field">
+          <%= f.text_field :name, placeholder: "Name", autofocus: true %>
+        </div>
+
+        <div class="field">
+          <%= f.email_field :email, placeholder: "Email Address" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password Confirmation" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Sign up", class: "ui large fluid olive button" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="ui grid">
+  <div class="row">
+    <div class="center aligned column">
+      <h1>Deciding what to read next?</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="center aligned column">
+      <p>You’re in the right place. Tell us what titles or genres you’ve enjoyed in the past, and we’ll give you surprisingly insightful recommendations.</p>
+    </div>
+  </div>
+</div>
