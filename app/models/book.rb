@@ -14,4 +14,8 @@ class Book < ApplicationRecord
       0
     end
   end
+
+  def released_year
+    self.released_date.split.last
+  end
 end

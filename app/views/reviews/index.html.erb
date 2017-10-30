@@ -18,6 +18,13 @@
   <div class="ui grid">
     <div class="ui vertical pointing menu">
       <div class="item">
+        <%= search_form_for @q, url: rate_books_path, html: {class: "ui mini form"} do |f| %>
+          <div class="ui icon input">
+            <%= f.search_field :title_cont, placeholder: "Books.." %>
+          </div>
+        <% end %>
+      </div>
+      <div class="item">
         <div class="header">Favorite genres:</div>
         <div class="menu">
           <% @fav_genres.each.with_index do |genre, index| %>

@@ -14,10 +14,12 @@
           </div>
           <div class="menu">
             <div class="item">
+              <%= search_form_for @q, html: {class: "ui book_search form"} do |f| %>
               <div class="ui icon input">
-                <input type="text" placeholder="Search books...">
+                <%= f.search_field :title_or_author_cont, placeholder: "Books, authors" %>
                 <i class="search link icon"></i>
               </div>
+              <% end %>
             </div>
           </div>
           <div class="ui right dropdown item header_dropdown">

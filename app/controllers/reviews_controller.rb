@@ -1,7 +1,9 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :set_global_search_var, only: :index
 
   def index
+    @q = Book.ransack(params[:q])
     @fav_genres = []
     fav_genre_ids = current_user.favorite_genres.pluck(:genre_id).each do |id|
       @fav_genres << Genre.find(id).name
@@ -19,7 +21,7 @@ class ReviewsController < ApplicationController
     if genre
       @genre_books = genre.books.page(params[:page]).per(50)
     else
-      @genre_books = Book.where(genre_id: fav_genre_ids[0]).page(params[:page]).per(50)
+      @genre_books = @q.result(distinct: true).page(params[:page]).per(50) || Book.where(genre_id: fav_genre_ids[0]).page(params[:page]).per(50)
     end
   end
 

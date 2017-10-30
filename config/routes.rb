@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/genres/', to: 'genres#index'
   get '/genres/:id', to: 'genres#show', as: 'genre'
 
+  get '/books', to: 'books#index'
   get '/books/:id', to: 'books#show', as: 'book'
 
   get '/recommendations', to: 'recommendations#index'

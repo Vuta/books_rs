@@ -16,3 +16,9 @@
 //= require turbolinks
 //= require semantic-ui
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  $('i.search.link.icon').on('click', function() {
+    $('form.book_search').submit();
+  })
+})
