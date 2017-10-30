@@ -86,4 +86,13 @@ class User < ApplicationRecord
       recommended_books.first(15)
     end
   end
+
+  def rated_books
+    books_ids = self.reviews.pluck(:book_id).uniq
+    books = Book.where(id: books_ids)
+  end
+
+  def format_rated_time(book)
+    Review.find_by(user_id: self, book_id: book).updated_at.strftime("%b %d, %Y %I:%M %p")
+  end
 end
