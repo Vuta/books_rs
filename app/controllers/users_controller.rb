@@ -20,11 +20,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-
+    @rated_books = @user.rated_books.page(params[:page]).per(15)
     unless @user
       flash[:danger] = "The page you was looking for doesn't exist."
       redirect_to root_url
     end
+    # binding.pry
   end
 
   # private

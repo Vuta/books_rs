@@ -1,0 +1,45 @@
+<div class="ui container">
+  <div class="ui vertical segment">
+    <div class="ui grid">
+      <div class="row">
+        <div class="two wide column">
+          <%= image_tag @book.cover.url, class: "ui fluid image" %>
+        </div>
+        <div class="ten wide column">
+          <div class="ui header">
+            <%= link_to @book.title, @book %>
+            <div class="sub header">
+              by <%= @book.author %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <div class="row">
+        <div class="sixteen wide column">
+          <% if current_user && current_user.reviews.pluck(:book_id).include?(@book.id) %>
+            <span class="sub header">My rating:</span>
+            <div class="ui star rating" data-max-rating="5" data-rating="<%= Review.find_by(user_id: current_user, book_id: @book).rate %>" data-book-id="<%= @book.id %>"></div>
+          <% else %>
+            <span class="sub header">Rate this book:</span>
+            <div class="ui star rating" data-max-rating="5" data-book-id="<%= @book.id %>"></div>
+          <% end %>
+        </div>
+        <div class="sixteen wide column">
+          <p>What did you think?</p>
+        </div>
+        <div class="sixteen wide column">
+          <%= form_for :review, url: text_reviews_path(@book), html: { class: "ui form" } do |f| %>
+            <div class="field">
+              <%= f.text_area :text, placeholder: "Enter your review (optional)" %>
+            </div>
+            <div class="field">
+              <%= f.submit "Save", class: "ui button" %>
+              <%= link_to "Cancel", @book, class: "ui button" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

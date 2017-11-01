@@ -37,16 +37,21 @@ $(document).on('turbolinks:load', function() {
 
   $('a.load_more_books').click(function(e) {
     counter += 1;
-    var genre = $('a.genre_link.active').data('genre');
+    var q = $('input#q_title_cont').val();
+    if(q) {
+      var genre = '';
+    } else {
+      var genre = $('a.genre_link.active').data('genre');
+    }
 
     $.ajax({
       type: 'GET',
       url: '/rate_books',
-      data: {'page': counter, 'genre': genre},
+      data: {'page': counter, 'genre': genre, 'q': {'title_cont': q}},
       success: function(res) {
-        var html = $(res).find('.' + genre + '.fav_content');
-        $('.twelve.wide.column.genre_books_content').append(html);
+        var html = $(res).find('.ui.five.column.grid');
 
+        $('.twelve.wide.column.genre_books_content').append(html);
         $('.ui.star.rating').rating();
       }
     });

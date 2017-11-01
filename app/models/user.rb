@@ -3,6 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/default_avatar.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
   before_save :downcase_email
   # has_secure_password
 
@@ -81,5 +85,14 @@ class User < ApplicationRecord
 
       recommended_books.first(15)
     end
+  end
+
+  def rated_books
+    books_ids = self.reviews.pluck(:book_id).uniq
+    books = Book.where(id: books_ids)
+  end
+
+  def format_rated_time(book)
+    Review.find_by(user_id: self, book_id: book).updated_at.strftime("%b %d, %Y %I:%M %p")
   end
 end

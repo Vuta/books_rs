@@ -13,6 +13,7 @@
               <div class="ui star rating" data-max-rating="5" data-book-id="<%= @book.id %>"></div>
             <% end %>
           </div>
+          <%= link_to "Write a review", new_text_review_path(@book), class: "ui mini button" %>
         </div>
         <div class="ui twelve wide column">
           <div class="row">
@@ -30,9 +31,9 @@
             <div>
               <%= @book.description %>
             </div>
-          </div>
 
-          <hr>
+            <div class="ui divider"></div>
+          </div>
 
           <div class="row">
             <h4 class="ui header">Other details:</h4>
@@ -44,8 +45,29 @@
         </div>
       </div>
       <div class="row">
-        <div class="column">
+        <div class="fifteen wide column">
           <div class="ui dividing header">Community Reviews</div>
+        </div>
+
+        <div class="fifteen wide column" style="margin-top: 20px;">
+          <% @book.text_reviews.each do |review| %>
+            <div class="ui grid">
+              <div class="row">
+                <div class="two wide column">
+                  <%= image_tag review.user.avatar, class: "ui tiny image" %>
+                </div>
+                <div class="ten wide column">
+                  <div class="ui header">
+                    <%= link_to review.user.name, review.user %> rated it <div class="ui star rating" data-rating="<%= review.rate %>"></div>
+                  </div>
+                  <p><%= review.text %></p>
+                </div>
+                <div class="four wide column right aligned floated">
+                  <%= review.updated_at.strftime("%b %d, %Y") %>
+                </div>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

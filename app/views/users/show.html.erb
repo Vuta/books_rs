@@ -1,2 +1,89 @@
-User profile of user :<%= @user.name %>.
-More contents is coming soon!
+<div class="ui vertical segment">
+  <div class="ui container">
+    <div class="ui grid">
+      <div class="twelve wide column">
+        <div class="ui grid">
+          <div class="row">
+            <div class="three wide column">
+              <%= image_tag @user.avatar.url, class: "ui fluid image" %>
+            </div>
+            <div class="twelve wide column">
+              <div class="ui dividing header">
+                <%= @user.name %> <small>(<%= link_to "edit profile", edit_user_registration_path %>)</small>
+              </div>
+              <div class="ui grid">
+                <div class="row">
+                  <div class="five wide column">
+                    <h5>Email</h5>
+                  </div>
+                  <div class="five wide column">
+                    <p><%= @user.email %></p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="five wide column">
+                    <h5>Activity</h5>
+                  </div>
+                  <div class="five wide column">
+                    <p>Joined in <%= @user.created_at.strftime("%b %Y") %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="fifteen wide column">
+              <div class="ui header dividing">Rated Books</div>
+            </div>
+            <div class="fifteen wide column">
+              <div class="ui grid" style="margin-top: 20px;">
+                <% @rated_books.each do |book| %>
+                  <div class="row">
+                    <div class="two wide column">
+                      <%= link_to image_tag(book.cover.url, class: "ui fluid image"), book %>
+                    </div>
+                    <div class="ten wide column">
+                      <h4 class="ui header">
+                        <%= link_to book.title, book %>
+                        <div class="sub header">
+                          <small>by</small> <%= book.author %>
+                        </div>
+                      </h4>
+                      <div>
+                        <div class="ui star rating disable" data-max-rating="5" data-rating="<%= book.avg_rating.to_i %>"></div>
+                        <%= book.avg_rating %> avg ratings - <%= book.reviews.pluck(:rate).length %> ratings - pubished <%= book.released_year %>
+                      </div>
+                    </div>
+                    <div class="four wide center aligned column">
+                        <div>My rating:</div>
+                        <div class="ui star rating" data-max-rating="5" data-rating="<%= Review.find_by(user_id: current_user, book_id: book).rate %>" data-book-id="<%= book.id %>"></div>
+                    </div>
+                    <div class="four wide column" style="margin-top: 10px;">
+                      <small><%= current_user.format_rated_time(book) %></small>
+                    </div>
+                  </div>
+                  <div class="ui divider"></div>
+                <% end %>
+                <div class="row centered">
+                  <%= paginate @rated_books %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="four wide right floated column">
+        <h5 class="ui header dividing">
+          FAVORITE GENRES
+          <small style="float: right;"><%= link_to "edit", fav_genres_path %></small>
+        </h5>
+        <ol class="ui list">
+          <% @user.favorite_genres.each do |fav_genre| %>
+            <li value="*"><%= fav_genre.genre.name.titleize %></li>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
