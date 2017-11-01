@@ -21,5 +21,8 @@ Rails.application.routes.draw do
   get '/books', to: 'books#index'
   get '/books/:id', to: 'books#show', as: 'book'
 
+  get '/books/:book_id/reviews/new', as: 'new_text_review', to: 'text_reviews#new'
+  post '/books/:book_id/reviews', as: 'text_reviews', to: 'text_reviews#create'
+
   get '/recommendations', to: 'recommendations#index'
 end

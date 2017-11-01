@@ -18,4 +18,8 @@ class Book < ApplicationRecord
   def released_year
     self.released_date.split.last
   end
+
+  def text_reviews
+    self.reviews.where.not(text: nil)
+  end
 end
