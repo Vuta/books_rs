@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   post '/books/:book_id/reviews', as: 'text_reviews', to: 'text_reviews#create'
 
   get '/recommendations', to: 'recommendations#index'
+
+  get '/search', to: 'search#index'
 end
