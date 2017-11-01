@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(user)
-    if user.favorite_genres = []
+    if user.favorite_genres == []
       fav_genres_path
     else
       user_path(user)
