@@ -1,7 +1,16 @@
 <div class="ui container">
   <div class="ui grid">
     <div class="row">
-
+      <div class="sixteen wide column">
+        <div class="ui dividing header">
+          POPULAR BOOKS OF THE LAST MONTH: <%= Date.current.strftime("%B %Y") %>
+        </div>
+      </div>
+      <% @popular_books.each do |book, _| %>
+        <div class="three wide column">
+          <%= link_to (image_tag book.cover.url, class: "ui small image"), book %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

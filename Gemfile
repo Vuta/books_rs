@@ -38,6 +38,7 @@ gem 'faker'
 gem 'activerecord-import'
 gem 'activeadmin'
 gem 'devise'
+gem 'whenever'
 
 gem 'semantic-ui-sass'
 gem 'kaminari'
