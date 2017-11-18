@@ -103,7 +103,7 @@ ActiveAdmin.setup do |config|
   #
   # Default:
   config.logout_link_path = :destroy_admin_user_session_path
-
+  config.logout_link_method = :delete
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
   #
@@ -218,14 +218,13 @@ ActiveAdmin.setup do |config|
   # You can add a navigation menu to be used in your application, or configure a provided menu
   #
   # To change the default utility navigation to show a link to your website & a logout btn
-  #
-  #   config.namespace :admin do |admin|
-  #     admin.build_menu :utility_navigation do |menu|
-  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #       admin.add_logout_button_to_menu menu
-  #     end
-  #   end
-  #
+
+    config.namespace :admin do |admin|
+      admin.build_menu :utility_navigation do |menu|
+        menu.add label: "Log Out", url: :destroy_admin_user_session_path, html_options: { method: :delete }
+      end
+    end
+
   # If you wanted to add a static menu item to the default menu provided:
   #
   #   config.namespace :admin do |admin|

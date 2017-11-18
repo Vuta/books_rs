@@ -9,12 +9,13 @@
             <i class="dropdown icon"></i>
             <div class="menu">
               <div class="item"><%= link_to "Recommendations", recommendations_path %></div>
-              <div class="item"><%= link_to "Top Popular", "#"  %></div>
+              <div class="item"><%= link_to "Explore", rate_books_path  %></div>
+              <div class="item"><%= link_to "Popular", books_path  %></div>
             </div>
           </div>
           <div class="menu">
             <div class="item">
-              <%= search_form_for @q, html: {class: "ui book_search form"} do |f| %>
+              <%= search_form_for @q, url: search_path, html: {class: "ui book_search form"} do |f| %>
               <div class="ui icon input">
                 <%= f.search_field :title_or_author_cont, placeholder: "Books, authors" %>
                 <i class="search link icon"></i>
@@ -49,17 +50,6 @@
               </div>
               </div>
             <% end %>
-
-              <div class="fields">
-                <div class="field">
-                </div>
-
-                <div class="field">
-                </div>
-
-                <div class="field">
-                </div>
-              </div>
           </div>
         <% end %>
     </div>

@@ -1,0 +1,45 @@
+<div class="ui container">
+  <div class="ui grid">
+    <div class="row">
+      <div class="fourteen wide centered column">
+        <div class="ui grid">
+          <% if @books.present? %>
+            <% @books.each do |book| %>
+              <div class="row divided">
+                <div class="two wide column">
+                  <%= link_to image_tag(book.cover.url, class: "ui fluid image"), book %>
+                </div>
+                <div class="ten wide column">
+                  <h4 class="ui header">
+                    <%= link_to book.title, book %>
+                    <div class="sub header">
+                      <small>by</small> <%= book.author %>
+                    </div>
+                  </h4>
+                  <div>
+                    <div class="ui star rating disable" data-max-rating="5" data-rating="<%= book.avg_rating.to_i %>"></div>
+                    <%= book.avg_rating %> avg ratings - <%= book.reviews.pluck(:rate).length %> ratings - pubished <%= book.released_year %>
+                  </div>
+                </div>
+                <div class="four wide center aligned column">
+                  <% if current_user && current_user.reviews.pluck(:book_id).include?(book.id) %>
+                    <div>My rating:</div>
+                    <div class="ui star rating" data-max-rating="5" data-rating="<%= Review.find_by(user_id: current_user, book_id: book).rate %>" data-book-id="<%= book.id %>"></div>
+                  <% else %>
+                    <div>Rate this book:</div>
+                    <div class="ui star rating" data-max-rating="5" data-book-id="<%= book.id %>"></div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+            <div class="row centered">
+              <%= paginate @books %>
+            </div>
+          <% else %>
+            <p>Sorry. No books found!</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
