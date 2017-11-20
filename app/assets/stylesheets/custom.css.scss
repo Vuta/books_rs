@@ -1,5 +1,25 @@
 @import 'semantic-ui';
 
+.body {
+  min-height: 100%;
+}
 .popular_image_size {
   height: 150px;
+}
+
+.ui.grid .row .home_discovered {
+  background-color: #f4f2e9;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding-top: 30px;
+  border-radius: 10px;
+}
+
+.ui.grid.footer {
+  margin-top: 40px;
+  background-color: #F4F1EA;
+
+  .ui.container {
+    font-size: 12px;
+  }
 }

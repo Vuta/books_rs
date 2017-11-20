@@ -58,7 +58,7 @@
                 </div>
                 <div class="ten wide column">
                   <div class="ui header">
-                    <%= link_to review.user.name, review.user %> rated it <div class="ui star rating" data-rating="<%= review.rate %>"></div>
+                    <%= link_to review.user.name, review.user %> rated it <div class="ui star rating disable" data-rating="<%= review.rate %>" data-max-rating="5"></div>
                   </div>
                   <p><%= review.text %></p>
                 </div>
