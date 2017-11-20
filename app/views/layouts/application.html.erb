@@ -9,6 +9,7 @@
   </head>
 
   <body>
+    <div class="body">
     <div class="ui vertical segment">
       <div class="ui grid">
         <%= render "layouts/header" %>
@@ -16,14 +17,15 @@
     </div>
 
     <div class="ui vertical segment">
-      <div>
-        <% flash.each do |type, message| %>
+      <% flash.each do |type, message| %>
+        <div class="ui message">
           <div class="flash flash-<%= type %>"><%= message %></div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
+
       <%= yield %>
     </div>
-
+    </div>
     <div class="ui vertical segment">
       <div class="ui grid footer">
         <%= render "layouts/footer" %>

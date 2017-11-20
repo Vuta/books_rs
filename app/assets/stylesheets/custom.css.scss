@@ -1,5 +1,8 @@
 @import 'semantic-ui';
 
+.body {
+  min-height: 100%;
+}
 .popular_image_size {
   height: 150px;
 }
@@ -13,6 +16,7 @@
 }
 
 .ui.grid.footer {
+  margin-top: 40px;
   background-color: #F4F1EA;
 
   .ui.container {
