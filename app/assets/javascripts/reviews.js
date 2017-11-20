@@ -59,6 +59,7 @@ $(document).on('turbolinks:load', function() {
 
 })
 
+// day la doan ajax gui request den '/rates'
 $(document).on('click', '.ui.star.rating', function() {
   var book_id = $(this).data('book-id');
   var rate = $(this).find('i.icon.active').length;

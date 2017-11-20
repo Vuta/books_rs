@@ -1,4 +1,6 @@
 class TextReviewsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @book = Book.find_by(id: params[:book_id])
   end
