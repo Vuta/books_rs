@@ -34,13 +34,70 @@
 </div>
 <div class="ui grid">
   <div class="row">
-    <div class="center aligned column">
-      <h1>Deciding what to read next?</h1>
+    <div class="eight wide column">
+      <div class="ui grid">
+        <div class="ten wide center aligned column right floated">
+          <h1>Deciding what to read next?</h1>
+          <p>You’re in the right place. Tell us what titles or genres you’ve enjoyed in the past, and we’ll give you surprisingly insightful recommendations.</p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="center aligned column">
-      <p>You’re in the right place. Tell us what titles or genres you’ve enjoyed in the past, and we’ll give you surprisingly insightful recommendations.</p>
+
+    <div class="eight wide column">
+      <div class="ui grid">
+        <div class="twelve wide center aligned column left floated">
+          <h1>What are your friends reading?</h1>
+          <p>Chances are your friends are discussing their favorite(and least favorite) books on Goodreads.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ten wide column centered align center aligned home_discovered">
+      <h3>What will <i>you</i> discover?</h3>
+      <div class="ui grid">
+
+        <div class="row">
+          <div class="twelve wide column left aligned">
+            <p>Because <%= User.first.name %> liked...</p>
+            <div class="ui grid">
+              <% Book.first(4).each do |book| %>
+                <div class="four wide column">
+                <%= image_tag book.cover.url, class: "ui image" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="four wide column center aligned">
+            <p>He discovered:</p>
+            <div class="ui grid">
+              <div class="twelve wide column centered align">
+                <%= image_tag Book.find(5).cover.url, class: "ui image" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="twelve wide column left aligned">
+            <p>Because <%= User.second.name %> liked...</p>
+            <div class="ui grid">
+              <% Book.limit(4).offset(15).each do |book| %>
+                <div class="four wide column">
+                <%= image_tag book.cover.url, class: "ui image" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="four wide column center aligned">
+            <p>He discovered:</p>
+            <div class="ui grid">
+              <div class="twelve wide column centered align">
+                <%= image_tag Book.find(20).cover.url, class: "ui image" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
