@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
+  before_action :authenticate_user
   skip_before_action :set_global_search_var, only: :index
 
   def index
@@ -26,13 +27,24 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    book_id = params[:book_id].to_i
-    rate = params[:rate].to_i
-    @review = current_user.reviews.find_by(book_id: book_id)
-    if @review
-      @review.update_attribute(:rate, rate)
-    else
-      @review = current_user.reviews.create(book_id: book_id, rate: rate)
+    if current_user
+      book_id = params[:book_id].to_i
+      rate = params[:rate].to_i
+      @review = current_user.reviews.find_by(book_id: book_id)
+      if @review
+        @review.update_attribute(:rate, rate)
+      else
+        @review = current_user.reviews.create(book_id: book_id, rate: rate)
+      end
+    end
+  end
+
+  private
+
+  def authenticate_user
+    unless current_user
+      flash[:notice] = "Please log in to continue"
+      redirect_to new_user_session_path
     end
   end
 end

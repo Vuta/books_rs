@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   # def new
   #   @user = User.new
   # end
@@ -20,10 +21,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @rated_books = @user.rated_books.page(params[:page]).per(15)
     unless @user
       flash[:danger] = "The page you was looking for doesn't exist."
       redirect_to root_url
+    else
+      @rated_books = @user.rated_books.page(params[:page]).per(15)
     end
     # binding.pry
   end
